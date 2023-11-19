@@ -3,7 +3,7 @@ const Product = require("../database/Product")
 
 const checkout = async(body) => {
     try{
-        const { userId, amount, items } = body
+        const { userEmail, amount, items } = body
 
         await items.forEach(async(item)=>{
             const { product } = item;
@@ -19,7 +19,7 @@ const checkout = async(body) => {
         })
 
         const newPurchase = new purchaseModel({
-            userId,
+            userEmail,
             amount,
             items
         });

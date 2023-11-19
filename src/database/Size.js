@@ -2,6 +2,19 @@ const { sizeModel } = require("../models/Size")
 
 const getAllSizes = async() => {
     const allSizes = await sizeModel.find();
+    allSizes.sort((a, b) => {
+        const sizeA = parseInt(a.size.match(/\d+/)[0]);
+        const sizeB = parseInt(b.size.match(/\d+/)[0]);
+
+        // Comparar los números
+        if (sizeA < sizeB) {
+            return -1;
+        }
+        if (sizeA > sizeB) {
+            return 1;
+        }
+        return 0;
+    })
     return allSizes;
 }
 

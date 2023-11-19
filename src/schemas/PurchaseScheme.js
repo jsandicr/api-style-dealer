@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const purchaseScheme = new mongoose.Schema({
-    userName: {
+    userEmail: {
         type: String,
         required: true
     },

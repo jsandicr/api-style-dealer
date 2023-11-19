@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
+require('dotenv').config()
 
 function initConnection(){
-    mongoose.connect('mongodb://localhost:27017/Style_Dealer', {
+    //const mongo_uri = process.env.mongo_uri || 'mongodb+srv://jsandicr16:gwYwNnehGuV6g1GP@cluster0.ewlnkax.mongodb.net/'
+    const mongo_uri = process.env.mongo_uri
+    console.log(mongo_uri)
+    mongoose.connect(mongo_uri, {
         useNewUrlParser: true,
         useUnifiedTopology: true
         }).then(() => {

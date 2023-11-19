@@ -62,6 +62,7 @@ const createProduct = async(req, res) => {
         const createdProduct = await productService.createProduct(newProduct)
         res.status(201).send({ status: "201", data: createdProduct })
     }catch(err){
+        console.log(err)
         res.status(500).send({ status: '500', message: 'Create Error' });
     }
 };

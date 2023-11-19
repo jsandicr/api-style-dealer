@@ -6,7 +6,7 @@ const checkout = async(req, res) => {
         const { body } = req;
         const { items } = body;
 
-        if(!body.userEmail || !body.amount || !body.items)
+        if(!body.userEmail || body.amount === undefined || !body.items)
         {
             res.status(400).send({ status: '400', message: 'Incomplete data' });
             return;    
@@ -23,15 +23,15 @@ const checkout = async(req, res) => {
             if(item.quantity > productInDatabase.stockQuantity){
                 return res.status(400).json({
                     status: '400',
-                    message: 'Insufficient Quantity in Stock',
+                    message: 'Insufficient Quantity in Stock for '+item.product.title+" "+item.product.color,
                     product: item.product
                 });
             }
         }
 
-        const checkout = purchaseService.checkout(body)
+        const checkout = await purchaseService.checkout(body)
         
-        res.status(201).json({ status: '200', message: checkout })
+        res.status(201).json({ status: '201', message: checkout })
     }catch(err){
         res.status(500).json({ status: '500', message: 'Error while retrieving products' });
     }
